@@ -14,9 +14,6 @@ function App() {
   const [theme, setTheme] = useState(() => {
     const saved = localStorage.getItem('theme');
     if (saved) return saved;
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      return 'dark';
-    }
     return 'light';
   });
 
@@ -141,6 +138,7 @@ function App() {
     alert('Data saved successfully!');
   };
 
+
   const loadFromLocalStorage = () => {
     const savedData = localStorage.getItem('cgpaData');
     if (savedData) {
@@ -169,7 +167,7 @@ function App() {
     <html>
       <head>
         <meta charset="utf-8" />
-        <title>CGPA Report</title>
+        <title>CGPA_Report${studentName ? '_' + studentName.replace(/[^a-z0-9-]/gi, '_') : ''}</title>
         <style>
           body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 24px; color: #1a202c; }
           h1 { margin: 0 0 4px 0; font-size: 28px; }
@@ -183,6 +181,17 @@ function App() {
           th, td { border: 1px solid #e2e8f0; padding: 8px 10px; text-align: left; }
           th { background: #f7fafc; }
           .footer { margin-top: 24px; font-size: 12px; color: #718096; }
+
+          /* Print styles for better mobile Save as PDF */
+          @page { size: A4; margin: 16mm; }
+          @media print {
+            body { padding: 0; }
+            .header { page-break-after: avoid; }
+            table { page-break-inside: auto; }
+            tr { page-break-inside: avoid; page-break-after: auto; }
+            thead { display: table-header-group; }
+            tfoot { display: table-footer-group; }
+          }
         </style>
       </head>
       <body>
@@ -218,6 +227,10 @@ function App() {
     printWindow.document.open();
     printWindow.document.write(html);
     printWindow.document.close();
+    const fileSafeName = `CGPA_Report${studentName ? '_' + studentName.replace(/[^a-z0-9-]/gi, '_') : ''}.pdf`;
+    try {
+      printWindow.document.title = fileSafeName;
+    } catch {}
     printWindow.focus();
     printWindow.onload = () => {
       printWindow.print();
@@ -277,17 +290,7 @@ function App() {
           <p className="subtitle">Calculate your Cumulative Grade Point Average</p>
         </header>
 
-        <div className="grade-reference">
-          <h3>Grade Reference Table</h3>
-          <div className="grade-table">
-            {Object.entries(gradeMapping).map(([grade, points]) => (
-              <div key={grade} className="grade-item">
-                <span className="grade">{grade}</span>
-                <span className="points">{points}</span>
-              </div>
-            ))}
-          </div>
-        </div>
+        {/* Moved Grade Reference under Advanced Features as collapsible */}
 
         <div className="calculator-section">
           <div className="input-group">
@@ -331,6 +334,18 @@ function App() {
                 Export DOC
               </button>
             </div>
+
+            <details className="grade-reference">
+              <summary>Grade Reference Table</summary>
+              <div className="grade-table">
+                {Object.entries(gradeMapping).map(([grade, points]) => (
+                  <div key={grade} className="grade-item">
+                    <span className="grade">{grade}</span>
+                    <span className="points">{points}</span>
+                  </div>
+                ))}
+              </div>
+            </details>
           </div>
 
           {showCalculator && (

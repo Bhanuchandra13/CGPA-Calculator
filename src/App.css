@@ -69,8 +69,9 @@ body.dark .container {
 .grade-reference {
   background: #f8f9ff;
   border-radius: 15px;
-  padding: 25px;
-  margin-bottom: 30px;
+  padding: 8px 12px;
+  margin-top: 12px;
+  margin-bottom: 20px;
   border: 2px solid #e8ecff;
 }
 
@@ -79,11 +80,71 @@ body.dark .grade-reference {
   border-color: #374151;
 }
 
-.grade-reference h3 {
+body.dark .grade-reference > summary {
+  background: #0f172a;
+  border-color: #334155;
+  color: #e5e7eb;
+}
+
+body.dark .grade-reference > summary:hover {
+  border-color: #475569;
+}
+
+body.dark .grade-reference > summary:focus {
+  box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.25);
+  border-color: #8b5cf6;
+}
+
+/* Styles for collapsible grade reference */
+/* Styles for collapsible grade reference */
+.grade-reference > summary {
+  cursor: pointer;
+  font-weight: 700;
   color: #4a5568;
-  margin-bottom: 20px;
-  font-size: 1.4rem;
-  text-align: center;
+  list-style: none;
+  font-size: 1.05rem;
+  margin-bottom: 4px;
+  padding: 10px 12px;
+  background: #ffffff;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.grade-reference > summary::-webkit-details-marker {
+  display: none;
+}
+
+.grade-reference > summary::after {
+  content: '▸';
+  margin-left: 8px;
+  transition: transform 0.2s ease;
+}
+
+.grade-reference[open] > summary::after {
+  transform: rotate(90deg);
+}
+
+.grade-reference[open] > summary {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.grade-reference .grade-table {
+  margin-top: 12px;
+}
+
+/* Focus and hover states */
+.grade-reference > summary:hover {
+  border-color: #cbd5e0;
+}
+
+.grade-reference > summary:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+  border-color: #667eea;
 }
 
 .grade-table {
@@ -408,6 +469,7 @@ body.dark .credits-input {
   gap: 15px;
   justify-content: center;
   flex-wrap: wrap;
+  margin-bottom: 12px;
 }
 
 .save-btn,
@@ -805,8 +867,19 @@ body.dark .footer-link {
   }
   
   .advanced-buttons {
-    flex-direction: column;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    width: 100%;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .save-btn,
+  .load-btn,
+  .export-btn {
+    width: 100%;
   }
   
   .subject-name-section {
