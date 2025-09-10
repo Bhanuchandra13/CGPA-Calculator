@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import './App.css';
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
     document.body.classList.add(theme);
     localStorage.setItem('theme', theme);
   }, [theme]);
+
 
   const gradeMapping = {
     'Ex': 10,
@@ -238,6 +240,7 @@ function App() {
 
   return (
     <div className="App">
+      <Analytics />
       <div className="top-controls">
         <a
           href="https://www.linkedin.com/in/bhanu-chandra-kolluru-195474232/"
