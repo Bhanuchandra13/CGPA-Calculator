@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#4f46e5"/>
+      <stop offset="100%" stop-color="#06b6d4"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="12" fill="url(#g)"/>
+  <!-- Calculator body -->
+  <rect x="14" y="12" width="36" height="40" rx="6" fill="#111827" opacity="0.92"/>
+  <!-- Display -->
+  <rect x="18" y="16" width="28" height="10" rx="2" fill="#e5e7eb"/>
+  <!-- Buttons -->
+  <g fill="#d1d5db">
+    <rect x="18" y="30" width="6" height="6" rx="1"/>
+    <rect x="26" y="30" width="6" height="6" rx="1"/>
+    <rect x="34" y="30" width="6" height="6" rx="1"/>
+    <rect x="18" y="38" width="6" height="6" rx="1"/>
+    <rect x="26" y="38" width="6" height="6" rx="1"/>
+    <rect x="34" y="38" width="12" height="6" rx="1" fill="#22c55e"/>
+  </g>
+  <!-- GPA spark line -->
+  <polyline points="18,26 24,22 30,24 36,20 44,21" fill="none" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"/>
+</svg>
+
